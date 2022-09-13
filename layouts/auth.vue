@@ -1,7 +1,6 @@
 <template>
   <div>
-    Slug:
-    {{ $route.params.slug }}
+    <Nuxt></Nuxt>
   </div>
 </template>
 
