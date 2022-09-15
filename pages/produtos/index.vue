@@ -8,7 +8,7 @@
     <div v-else class="border-b border-gray-400 py-4">
       <ul>
         <li v-for="produto in products" :key="produto.id">
-          {{ produto.username }}
+          {{ produto.title }}
         </li>
       </ul>
     </div>
@@ -28,10 +28,8 @@ export default {
     };
   },
   async fetch() {
-    const response = await fetch(
-      "https://jsonplaceholder.typicode.com/users?_limit=10"
-    );
-    const products = await response.json();
+    const response = await this.$axios.$get("posts?_limit=3");
+    const products = response;
     this.products = products;
   },
 };
