@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import auth from "@/middleware/auth";
+// import auth from "@/middleware/auth";
 export default {
   name: "AboutPage",
   // middleware: auth,
