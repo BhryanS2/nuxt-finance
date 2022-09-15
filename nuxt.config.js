@@ -33,6 +33,7 @@ export default {
     "@/plugins/my-plugin.js",
     "@/plugins/day.js",
     "@/plugins/vtooltip.js",
+    "@/plugins/axios.js",
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
