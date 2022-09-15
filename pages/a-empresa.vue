@@ -10,8 +10,13 @@
 </template>
 
 <script>
+import auth from "@/middleware/auth";
 export default {
   name: "AboutPage",
+  // middleware: auth,
+  // middleware() {
+  //   console.log("Middleware da página A empresa");
+  // },
 };
 </script>
 
