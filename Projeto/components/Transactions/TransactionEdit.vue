@@ -73,17 +73,25 @@ export default {
     this.categories = await this.$store.dispatch("categories/getCategories");
   },
   methods: {
-    updateTransaction() {
-      const data = {
-        date: this.localTransaction.date,
-        description: this.localTransaction.description,
-        amount: this.localTransaction.amount,
-        categoryId: this.localTransaction.categoryId,
-      };
-      this.$store.dispatch("transactions/updateTransaction", {
-        id: this.transaction.id,
-        data,
-      });
+    async updateTransaction() {
+      try {
+        const response = await this.$store.dispatch(
+          "transactions/updateTransaction",
+          {
+            id: this.transaction.id,
+            data: this.localTransaction,
+          }
+        );
+        this.$emit("update", {
+          ...response,
+          category: this.categories.find(
+            (category) => category.id === response.categoryId
+          ),
+        });
+        this.onCancel();
+      } catch (error) {
+        console.log(error);
+      }
     },
     onCancel() {
       this.$emit("cancel");
@@ -91,4 +99,3 @@ export default {
   },
 };
 </script>
-Footer © 2022 GitHub, Inc. Footer navigation

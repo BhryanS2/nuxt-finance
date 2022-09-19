@@ -1,6 +1,12 @@
 export default {
-  getTransactions() {
-    const response = this.$axios.$get("/transactions?_expand=category");
+  getTransactions(context, filter = {}) {
+    const config = {
+      params: {
+        _expand: "category",
+        ...filter,
+      },
+    };
+    const response = this.$axios.$get("/transactions?_expand=category", config);
 
     return response;
   },

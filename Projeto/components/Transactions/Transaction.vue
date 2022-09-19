@@ -51,7 +51,13 @@
           </svg>
 
           <div class="font-bold">
-            {{ transaction.amount | currency }}
+            {{
+              new Intl.NumberFormat("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+                signDisplay: "never",
+              }).format(transaction.amount)
+            }}
           </div>
         </div>
 
@@ -78,6 +84,7 @@
       :transaction="transaction"
       v-if="isUpdating"
       @cancel="isUpdating = false"
+      @update="onUpdateTransaction"
     />
   </div>
 </template>
@@ -99,6 +106,11 @@ export default {
     return {
       isUpdating: false,
     };
+  },
+  methods: {
+    onUpdateTransaction(transaction) {
+      this.$emit("update", transaction);
+    },
   },
 };
 </script>
