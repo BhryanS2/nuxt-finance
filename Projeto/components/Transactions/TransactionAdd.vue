@@ -1,6 +1,5 @@
 <template>
-  <form
-    @submit.prevent="addTransaction"
+  <div
     class="my-4 space-y-4 border-2 border-indigo-200 border-dashed bg-indigo-50 p-5 rounded-xl"
   >
     <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-5">
@@ -36,7 +35,7 @@
 
       <AppButton type="submit" @click="addTransaction"> Adicionar </AppButton>
     </div>
-  </form>
+  </div>
 </template>
 
 <script>
@@ -69,7 +68,16 @@ export default {
 
   methods: {
     addTransaction() {
-      this.$store.dispatch("transactions/addTransaction", this.form);
+      this.$store
+        .dispatch("transactions/addTransaction", this.form)
+        .then((response) => {
+          this.$emit("onAddTransactionAfter", {
+            ...response,
+            category: this.categories.find(
+              (category) => category.id == this.form.categoryId
+            ),
+          });
+        });
     },
     onCancel() {
       this.$emit("cancel");
